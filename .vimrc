@@ -14,7 +14,7 @@ set tabstop=4
 set softtabstop=0
 set shiftwidth=4
 set encoding=utf-8
-set fileencoding=utf-8,sjis,cp932
+set fileencodings=utf-8,sjis,cp932
 set fileformats=unix,dos,mac
 set nobackup
 set noswapfile
