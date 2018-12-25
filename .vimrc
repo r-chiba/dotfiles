@@ -21,3 +21,4 @@ set noswapfile
 set noundofile
 set clipboard+=unnamed
 set clipboard=unnamed
+autocmd BufRead,BufNewFile Makefile setlocal noexpandtab
