@@ -22,3 +22,12 @@ set noundofile
 set clipboard+=unnamed
 set clipboard=unnamed
 autocmd BufRead,BufNewFile Makefile setlocal noexpandtab
+map <C-g> :Gtags
+map <C-h> :Gtags -f %<CR>
+map <C-j> :GtagsCursor<CR>
+map <C-n> :cn<CR>
+map <C-p> :cp<CR>
+map <C-l> gt
+map <C-m> gT
+map <C-u> :colder<CR>
+map <C-y> :cnewer<CR>
