@@ -21,6 +21,8 @@ set noswapfile
 set noundofile
 set clipboard+=unnamed
 set clipboard=unnamed
+set modeline
+set modelines=5
 autocmd BufRead,BufNewFile Makefile setlocal noexpandtab
 map <C-g> :Gtags
 map <C-h> :Gtags -f %<CR>
@@ -31,3 +33,17 @@ map <C-l> gt
 map <C-m> gT
 map <C-u> :colder<CR>
 map <C-y> :cnewer<CR>
+nnoremap ; :
+nnoremap : ;
+
+augroup vimrcEx
+    au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
+        \ exe "normal g`\"" | endif
+augroup END
+
+augroup autoCommentOff
+    autocmd!
+    autocmd BufEnter * setlocal formatoptions-=r
+    autocmd BufEnter * setlocal formatoptions-=o
+augroup END
+
