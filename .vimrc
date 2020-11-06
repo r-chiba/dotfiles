@@ -23,27 +23,33 @@ set clipboard+=unnamed
 set clipboard=unnamed
 set modeline
 set modelines=5
-autocmd BufRead,BufNewFile Makefile setlocal noexpandtab
-map <C-g> :Gtags
-map <C-h> :Gtags -f %<CR>
-map <C-j> :GtagsCursor<CR>
-map <C-n> :cn<CR>
-map <C-p> :cp<CR>
-map <C-l> gt
-map <C-m> gT
-map <C-u> :colder<CR>
-map <C-y> :cnewer<CR>
+set hlsearch
+nnoremap <C-g> :Gtags
+nnoremap <C-h> :Gtags -f %<CR>
+nnoremap <C-j> :GtagsCursor<CR>
+nnoremap <C-n> :cn<CR>
+nnoremap <C-p> :cp<CR>
+nnoremap <C-l> gt
+nnoremap <C-m> gT
+nnoremap <C-u> :colder<CR>
+nnoremap <C-y> :cnewer<CR>
 nnoremap ; :
 nnoremap : ;
 
-augroup vimrcEx
-    au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
-        \ exe "normal g`\"" | endif
-augroup END
+let &t_SI .= "\e[6 q" " start insert mode; solid vertical bar cursor
+let &t_EI .= "\e[2 q" " end insert mode; solid block cursor
+let ff_table = {'dos': 'CR+LF', 'unix': 'LF', 'max': 'CR'}
+let &statusline = '%f %h%m%r%w%=[%{(&fenc!=""?&fenc:&enc)}:%{ff_table[&ff]}] %-14.(%l,%c%V%) %P'
 
-augroup autoCommentOff
+augroup mycmd
     autocmd!
-    autocmd BufEnter * setlocal formatoptions-=r
-    autocmd BufEnter * setlocal formatoptions-=o
+    " don't convert tab to spaces if the file is Makefile
+    autocmd BufRead,BufNewFile Makefile setlocal noexpandtab
+    " set the cursor to the last position
+    autocmd BufRead * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
+    " Close the quickfix window if there is only the window
+    autocmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&buftype') == 'quickfix') | quit | endif
+    " invalidate auto-comment functionality
+    autocmd BufEnter * setlocal formatoptions-=ro
 augroup END
 
