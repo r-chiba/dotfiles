@@ -31,13 +31,14 @@ nnoremap <C-n> :cn<CR>
 nnoremap <C-p> :cp<CR>
 nnoremap <C-l> gt
 nnoremap <C-m> gT
-nnoremap <C-u> :colder<CR>
+nnoremap <C-e> :colder<CR>
 nnoremap <C-y> :cnewer<CR>
 nnoremap ; :
 nnoremap : ;
 
 let &t_SI .= "\e[6 q" " start insert mode; solid vertical bar cursor
 let &t_EI .= "\e[2 q" " end insert mode; solid block cursor
+let &t_SR .= "\e[1 q" " start replace mode; blinking block cursor
 let ff_table = {'dos': 'CR+LF', 'unix': 'LF', 'max': 'CR'}
 let &statusline = '%f %h%m%r%w%=[%{(&fenc!=""?&fenc:&enc)}:%{ff_table[&ff]}] %-14.(%l,%c%V%) %P'
 
